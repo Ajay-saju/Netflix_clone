@@ -27,6 +27,12 @@ class _SearchScreenState extends State<SearchScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CupertinoSearchTextField(
+                  onSuffixTap: () {
+                    setState(() {
+                      valueOf =true; 
+                    });
+                    
+                  },
                   onSubmitted: (value) {
                     setState(() {
                       valueOf = false;

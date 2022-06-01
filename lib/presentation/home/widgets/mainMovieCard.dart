@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/apiObjects/apiKey.dart';
 import 'package:netflix_clone/core/constsize.dart';
+import 'package:netflix_clone/presentation/home/home.dart';
 import 'package:netflix_clone/presentation/home/widgets/homeMovieCard2.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NetflixMovieCardView extends StatelessWidget {
   final String api;
@@ -30,8 +32,10 @@ class NetflixMovieCardView extends StatelessWidget {
                     separatorBuilder: (context, index) => cwidth,
                     itemCount: 20,
                   ),
-                )
-              : loadingText;
+                ) 
+              :Shimmer.fromColors(child:Container( height: 190,color: Colors.grey,
+      width: 110,) , baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[800]!,);
         });
   }
 }

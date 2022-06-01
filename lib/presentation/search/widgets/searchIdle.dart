@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/apiObjects/apiKey.dart';
 import 'package:netflix_clone/core/constsize.dart';
+import 'package:netflix_clone/presentation/home/home.dart';
 import 'package:netflix_clone/presentation/search/widgets/searchTitle.dart';
+import 'package:shimmer/shimmer.dart';
 
 const imageId = 'https://image.tmdb.org/t/p/original';
 
@@ -11,6 +13,7 @@ class SearchIdle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final screenWidth = MediaQuery.of(context).size.width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,7 +37,8 @@ class SearchIdle extends StatelessWidget {
                               ),
                           separatorBuilder: (ctx, index) => cHeight,
                           itemCount: 20)
-                      : Text('Loading .....');
+                      :  Shimmer.fromColors(child: Container( width: screenWidth * 0.38,color: Colors.grey,
+          height: 80,),baseColor: Colors.grey[300]!,highlightColor:Colors.grey [500]!,);
                 })),
       ],
     );

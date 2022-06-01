@@ -14,10 +14,11 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  String search = '';
   bool valueOf = true;
   @override
   Widget build(BuildContext context) {
-    
+    TextEditingController _controller = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -27,11 +28,13 @@ class _SearchScreenState extends State<SearchScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CupertinoSearchTextField(
+                  controller: _controller,
                   onSuffixTap: () {
                     setState(() {
-                      valueOf =true; 
+                      valueOf = true;
+
+                      _controller.clear();
                     });
-                    
                   },
                   onSubmitted: (value) {
                     setState(() {

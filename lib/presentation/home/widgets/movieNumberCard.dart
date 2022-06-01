@@ -4,7 +4,9 @@ import 'package:netflix_clone/apiObjects/apiKey.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
 
 import 'package:netflix_clone/core/constsize.dart';
+import 'package:netflix_clone/presentation/home/home.dart';
 import 'package:netflix_clone/presentation/search/widgets/searchIdle.dart';
+import 'package:shimmer/shimmer.dart';
 
 const gridImages2 =
     'https://igimages.gumlet.io/tamil/gallery/movies/thalapathy64/poster1.jpg?w=160&dpr=2.6';
@@ -37,7 +39,8 @@ class NetflixMovieNumberCardView extends StatelessWidget {
                     ),
                   ),
                 )
-              : loadingText;
+              : Shimmer.fromColors(baseColor: Colors.grey[300]!, highlightColor:Colors.grey[500]!,
+              child: Container(height: 190,color: Colors.grey,),);
         });
   }
 }

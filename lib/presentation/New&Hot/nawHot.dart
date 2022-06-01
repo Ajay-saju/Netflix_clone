@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/apiObjects/apiKey.dart';
 
-import 'package:netflix_clone/core/constsize.dart';
+
 import 'package:netflix_clone/presentation/search/widgets/searchIdle.dart';
 import 'package:netflix_clone/presentation/widgets/app_bar_widget.dart';
 import 'package:scrollable_list_tabview/scrollable_list_tabview.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 // import 'package:scrollable_list_tabview/scrollable_list_tabview.dart';
 
 class NewAndHotScreen extends StatefulWidget {
@@ -44,7 +45,7 @@ class _NewAndHotScreenState extends State<NewAndHotScreen>
               borderRadius: BorderRadius.circular(30),
             ),
             body: CustomScrollView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               slivers: [
                 SliverToBoxAdapter(
@@ -86,7 +87,9 @@ class _NewAndHotScreenState extends State<NewAndHotScreen>
                                   );
                                 });
                           } else {
-                            return loadingText;
+                            return  Shimmer.fromColors(child: Container(width: width,
+                            height: 300,
+                            color: Colors.grey,),baseColor: Colors.grey[300]!, highlightColor: Colors.grey[500]!,);
                           }
                         }))
               ],
@@ -144,7 +147,7 @@ class _NewAndHotScreenState extends State<NewAndHotScreen>
                                     );
                                   });
                             } else {
-                              return loadingText;
+                              return Shimmer.fromColors(baseColor: Colors.grey[300]!, highlightColor:Colors.grey[500]!, child:Container(width: width,height: 600, color: Colors.grey,),);
                             }
                           }))
                 ],
@@ -186,7 +189,7 @@ class _NewAndHotScreenState extends State<NewAndHotScreen>
                                         snapshot: snapshot,
                                       );
                                     })
-                                : loadingText;
+                                : Shimmer.fromColors(child: Container(width: width,color: Colors.grey,), baseColor: Colors.grey[300]!, highlightColor: Colors.grey[500]!);
                           }))
                 ],
               )),

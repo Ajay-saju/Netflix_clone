@@ -14,20 +14,24 @@ import 'package:netflix_clone/presentation/home/widgets/moviesCatogory.dart';
 import 'package:netflix_clone/presentation/home/widgets/moviespage.dart';
 import 'package:netflix_clone/presentation/search/widgets/searchIdle.dart';
 import 'package:netflix_clone/presentation/widgets/app_bar_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+  
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   bool change = true;
   ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         body: ValueListenableBuilder(
       valueListenable: scrollNotifier,
@@ -71,7 +75,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     snapshot.data![0]
                                                         .posterPath!))),
                                       )
-                                    : loadingText;
+                                    :  Shimmer.fromColors(child:Container(
+                                      color: Colors.grey,
+                                      height: 500,
+                                        width: double.infinity,
+                                    ) ,   baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[800]!,);
                               }),
                           Positioned(
                             bottom: 0,
@@ -225,98 +234,103 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
-                          change ?
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              TextButton(
-                                  onPressed: () {
-                                    
-                                  },
-                                  child: const Text(
-                                    'Tv Shows',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: cwhite),
-                                  )),
-                              TextButton(
-                                  onPressed: () {
-                                    setState(() {
-                                                  change = false;
-                                                });
-                                    
-                                  },
-                                  child: const Text(
-                                    'Movies',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: cwhite),
-                                  )),
-                              Row(
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (ctx) =>
-                                              CatagoriesPage(isCategory: true));
-                                    },
-                                    child: const Text(
-                                      'Catagories',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                          color: cwhite),
+                          change
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    TextButton(
+                                        onPressed: () {},
+                                        child: const Text(
+                                          'Tv Shows',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: cwhite),
+                                        )),
+                                    TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            change = false;
+                                          });
+                                        },
+                                        child: const Text(
+                                          'Movies',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: cwhite),
+                                        )),
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (ctx) =>
+                                                    CatagoriesPage(
+                                                        isCategory: true));
+                                          },
+                                          child: const Text(
+                                            'Catagories',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                                color: cwhite),
+                                          ),
+                                        ),
+                                        const Icon(
+                                            Icons.arrow_drop_down_rounded),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              : Row(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) =>
+                                                      const MoviesPage());
+                                            },
+                                            child: const Text(
+                                              'Movies',
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: cwhite),
+                                            )),
+                                        const Icon(
+                                            Icons.arrow_drop_down_rounded),
+                                      ],
                                     ),
-                                  ),
-                                  const Icon(Icons.arrow_drop_down_rounded),
-                                ],
-                              )
-                            ],
-                          ):Row(
-                            children: [
-                              Row(
-                                children: [
-                                  TextButton(
-                                      onPressed: () {
-                                        showDialog(context: context, builder: (ctx)=>const MoviesPage());
-                                        
-                                      },
-                                      child: const Text(
-                                        'Movies',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600,
-                                            color: cwhite),
-                                      )),
-                                    const Icon(Icons.arrow_drop_down_rounded),  
-                                ],
-                              ),
-                                  Row(
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (ctx) =>
-                                              CatagoriesPage(isCategory: true));
-                                    },
-                                    child: const Text(
-                                      'Catagories',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                          color: cwhite),
-                                    ),
-                                  ),
-                                  const Icon(Icons.arrow_drop_down_rounded),
-                                ],
-                              )
-
-                            ],
-                          )
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (ctx) =>
+                                                    CatagoriesPage(
+                                                        isCategory: true));
+                                          },
+                                          child: const Text(
+                                            'Catagories',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                                color: cwhite),
+                                          ),
+                                        ),
+                                        const Icon(
+                                            Icons.arrow_drop_down_rounded),
+                                      ],
+                                    )
+                                  ],
+                                )
                         ],
                       ),
                       height: 125,
@@ -330,6 +344,32 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 }
+
+// class ShimmerWidget extends StatelessWidget {
+//   const ShimmerWidget({
+//     Key? key,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: 200.0,
+//       height: 100.0,
+//       child: Shimmer.fromColors(
+//         baseColor: Colors.red,
+//         highlightColor: Colors.yellow,
+//         child: const Text(
+//           '',
+//           textAlign: TextAlign.center,
+//           style: TextStyle(
+//             fontSize: 40.0,
+//             fontWeight: FontWeight.bold,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class MainCardIcon extends StatelessWidget {
   final IconData icon;
@@ -383,8 +423,36 @@ class MovieCardWithPlayButton extends StatelessWidget {
                     separatorBuilder: (context, index) => cwidth,
                     itemCount: 20,
                   )
-                : loadingText;
+                : 
+                CustomShimmer();
           }),
     );
+  }
+}
+
+class CustomShimmer extends StatelessWidget {
+  const CustomShimmer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+        child: ListView.separated(
+            itemBuilder: (context, index) {
+              return Container(
+                height: 190,
+                width: 110,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.grey,
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => cwidth,
+            itemCount: 20),
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[500]!,
+      );
   }
 }

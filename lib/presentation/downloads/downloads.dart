@@ -6,6 +6,7 @@ import 'package:netflix_clone/apiObjects/apiKey.dart';
 import 'package:netflix_clone/apiObjects/get_tmdb_data/get_tmdb_data.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
 import 'package:netflix_clone/core/constsize.dart';
+import 'package:netflix_clone/presentation/home/home.dart';
 import 'package:netflix_clone/presentation/widgets/app_bar_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -108,7 +109,12 @@ class DownloadScreen extends StatelessWidget {
                           ],
                         ),
                       )
-                    : const Text('Loading....');
+                    :  Shimmer.fromColors(child: Container(
+                       height: 280,
+                        width: 300,
+                        color: Colors.grey,
+
+                    ), baseColor: Colors.grey[300]!, highlightColor: Colors.grey[500]! );
               },
             ),
             const SizedBox(
